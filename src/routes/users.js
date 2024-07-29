@@ -22,6 +22,21 @@ router.post("/", auth, async (req, res, next) => {
   try {
     const { username, password, name, email, phoneNumber, profilePicture } =
       req.body;
+
+    if (
+      !username ||
+      !password ||
+      !name ||
+      !email ||
+      !phoneNumber ||
+      !profilePicture
+    ) {
+      return res.status(400).send({
+        message:
+          "All fields are required: username, password, name, email, phoneNumber and profilePicture",
+      });
+    }
+
     const newUser = await createUser({
       username,
       password,

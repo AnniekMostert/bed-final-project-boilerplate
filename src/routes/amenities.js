@@ -20,6 +20,13 @@ router.get("/", async (req, res, next) => {
 router.post("/", auth, async (req, res, next) => {
   try {
     const { name } = req.body;
+
+    if (!name) {
+      return res.status(400).send({
+        message: "All fields are required: name",
+      });
+    }
+
     const newAmenity = await createAmenity({ name });
     res.status(201).send({
       message: `Account succesfully created`,

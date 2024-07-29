@@ -7,8 +7,8 @@ const createReview = async (newReview) => {
   const review = await prisma.review.create({
     data: {
       ...rest,
-      userId: { connect: { id: userId } },
-      propertyId: { connect: { id: propertyId } },
+      user: { connect: { id: userId } },
+      property: { connect: { id: propertyId } },
     },
   });
 

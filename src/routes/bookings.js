@@ -29,6 +29,22 @@ router.post("/", auth, async (req, res, next) => {
       totalPrice,
       bookingStatus,
     } = req.body;
+
+    if (
+      !userId ||
+      !propertyId ||
+      !checkinDate ||
+      !checkoutDate ||
+      !numberOfGuests ||
+      !totalPrice ||
+      !bookingStatus
+    ) {
+      return res.status(400).send({
+        message:
+          "All fields are required: userId, propertyId, checkinDate, checkoutDate, numberOfGuests, totalPrice, bookingStatus",
+      });
+    }
+
     const newBooking = await createBooking({
       userId,
       propertyId,
@@ -74,6 +90,7 @@ router.put("/:id", auth, async (req, res, next) => {
       totalPrice,
       bookingStatus,
     } = req.body;
+
     const booking = await updateBookingById(id, {
       userId,
       propertyId,

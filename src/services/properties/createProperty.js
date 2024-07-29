@@ -7,7 +7,7 @@ const createProperty = async (newProperty) => {
   const property = await prisma.property.create({
     data: {
       ...rest,
-      hostId: { connect: { id: hostId } },
+      host: { connect: { id: hostId } },
     },
   });
 

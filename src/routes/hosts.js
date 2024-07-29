@@ -29,6 +29,22 @@ router.post("/", auth, async (req, res, next) => {
       profilePicture,
       aboutMe,
     } = req.body;
+
+    if (
+      !username ||
+      !password ||
+      !name ||
+      !email ||
+      !phoneNumber ||
+      !profilePicture ||
+      !aboutMe
+    ) {
+      return res.status(400).send({
+        message:
+          "All fields are required: username, password, name, email, phonenNumber, profilePicture and aboutMe",
+      });
+    }
+
     const newHost = await createHost({
       username,
       password,

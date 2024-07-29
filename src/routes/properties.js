@@ -31,6 +31,24 @@ router.post("/", auth, async (req, res, next) => {
       hostId,
       rating,
     } = req.body;
+
+    if (
+      !title ||
+      !description ||
+      !location ||
+      !pricePerNight ||
+      !bedroomCount ||
+      !bathroomCount ||
+      !maxGuestCount ||
+      !hostId ||
+      !rating
+    ) {
+      return res.status(400).send({
+        message:
+          "All fields are required: title, description, location, pricePerNight, bedroomCount, bathroomCount, maxGuestCount, hostId, rating",
+      });
+    }
+
     const newProperty = await createProperty({
       title,
       description,
